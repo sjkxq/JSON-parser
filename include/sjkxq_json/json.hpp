@@ -4,11 +4,12 @@
 #include "value.hpp"
 #include "parser.hpp"
 #include "serializer.hpp"
+#include <string_view>
 
 namespace sjkxq_json {
 
 // 解析JSON字符串
-inline Value parse(const std::string& json) {
+inline Value parse(std::string_view json) {
     return Parser::parse(json);
 }
 

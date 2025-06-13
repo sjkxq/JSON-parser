@@ -3,6 +3,7 @@
 
 #include "value.hpp"
 #include <string>
+#include <string_view>
 #include <stdexcept>
 #include <cctype>
 #include <cstdlib>
@@ -13,13 +14,13 @@ namespace sjkxq_json {
 class Parser {
 public:
     // 从字符串解析JSON
-    static Value parse(const std::string& json) {
+    static Value parse(std::string_view json) {
         Parser parser(json);
         return parser.parse_value();
     }
 
 private:
-    Parser(const std::string& json) : json_(json), pos_(0) {}
+    Parser(std::string_view json) : json_(json), pos_(0) {}
 
     // 跳过空白字符
     void skip_whitespace() {
@@ -119,7 +120,7 @@ private:
                         if (pos_ + 3 >= json_.size()) {
                             throw std::runtime_error("Unexpected end of input in Unicode escape");
                         }
-                        std::string hex = json_.substr(pos_, 4);
+                        std::string hex(json_.substr(pos_, 4));
                         pos_ += 4;
                         
                         // 简单处理：只支持基本多语言平面（BMP）
@@ -207,7 +208,7 @@ private:
             }
         }
 
-        std::string number_str = json_.substr(start_pos, pos_ - start_pos);
+        std::string number_str{json_.substr(start_pos, pos_ - start_pos)};
         if (has_fraction || has_exponent) {
             return Value(std::stod(number_str));
         } else {
@@ -290,7 +291,7 @@ private:
         return Value(object);
     }
 
-    std::string json_;
+    std::string_view json_;
     size_t pos_;
 };
 
