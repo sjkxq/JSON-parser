@@ -1,0 +1,20 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# 查找依赖项
+# find_dependency(...)
+
+# 包含目标文件
+include("${CMAKE_CURRENT_LIST_DIR}/sjkxq_jsonTargets.cmake")
+
+# 版本检查
+set(PACKAGE_VERSION @PROJECT_VERSION@)
+
+# 检查版本兼容性
+if(NOT ${PACKAGE_FIND_VERSION} VERSION_LESS @PROJECT_VERSION@)
+    set(PACKAGE_VERSION_COMPATIBLE 1)
+    if(${PACKAGE_FIND_VERSION} VERSION_EQUAL @PROJECT_VERSION@)
+        set(PACKAGE_VERSION_EXACT 1)
+    endif()
+endif()
