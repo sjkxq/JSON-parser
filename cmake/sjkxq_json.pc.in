@@ -1,0 +1,7 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+includedir=${prefix}/include
+
+Name: sjkxq_json
+Description: A modern C++ JSON parser library
+Version: @PROJECT_VERSION@
+Cflags: -I${includedir}

@@ -1,0 +1,88 @@
+---
+# 配置clang-tidy检查
+Checks: >
+  -*,
+  bugprone-*,
+  cert-*,
+  cppcoreguidelines-*,
+  google-*,
+  hicpp-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -google-readability-namespace-comments,
+  -google-runtime-int,
+  -google-runtime-references,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-magic-numbers,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-vararg,
+  -hicpp-vararg
+
+# 关闭某些特定的检查
+# - modernize-use-trailing-return-type: 不强制使用尾返回类型语法
+# - google-readability-namespace-comments: 不要求命名空间结束注释
+# - google-runtime-int: 允许使用int而不是int32_t等
+# - google-runtime-references: 允许非const引用参数
+# - cppcoreguidelines-avoid-magic-numbers: 允许使用魔数
+# - readability-magic-numbers: 允许使用魔数
+# - cppcoreguidelines-pro-bounds-pointer-arithmetic: 允许指针算术
+# - cppcoreguidelines-pro-type-vararg: 允许使用可变参数
+# - hicpp-vararg: 允许使用可变参数
+
+# 警告作为错误
+WarningsAsErrors: ''
+
+# 头文件过滤器
+HeaderFilterRegex: '.*'
+
+# 分析器选项
+
+# 格式化选项
+FormatStyle: file
+
+# 用户自定义映射
+CheckOptions:
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.MemberCase
+    value: camelBack
+  - key: readability-identifier-naming.MethodCase
+    value: camelBack
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: 'm_'
+  - key: readability-identifier-naming.PrivateMethodPrefix
+    value: ''
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.TemplateParameterCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypedefCase
+    value: CamelCase
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor
+    value: true
+  - key: cppcoreguidelines-special-member-functions.AllowMissingMoveFunctions
+    value: true
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: true

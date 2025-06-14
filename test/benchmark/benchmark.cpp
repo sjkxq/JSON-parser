@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
-#include <sjkxq_json/json.hpp>
 #include <fstream>
+#include <sjkxq_json/json.hpp>
 #include <sstream>
 
 // Test data constants
@@ -23,11 +23,11 @@ static void BM_ParseLargeJson(benchmark::State& state) {
         state.SkipWithError("Failed to open test_data/large.json");
         return;
     }
-    
+
     std::stringstream buffer;
     buffer << file.rdbuf();
     const std::string json = buffer.str();
-    
+
     for (auto _ : state) {
         Value v = parse(json);
         benchmark::DoNotOptimize(v);
@@ -45,10 +45,10 @@ static void BM_Stringify(benchmark::State& state) {
     arr.emplace_back(2);
     arr.emplace_back(3);
     v["items"] = Value(arr);
-    
+
     // Pre-compute the size once
     const size_t json_size = stringify(v).size();
-    
+
     for (auto _ : state) {
         std::string result = stringify(v);
         benchmark::DoNotOptimize(result);
